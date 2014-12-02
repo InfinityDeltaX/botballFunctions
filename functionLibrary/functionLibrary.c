@@ -5,7 +5,7 @@
 #define CAMERA_WIDTH 160
 #define IR_PORT 0
 #define BLACK_LINE_COLOR 700
-
+#define SERVO_PORT 3
 static int unitsPer360Turn = -1; //This number of units will makes the robot turn 360 degrees. Calculate with testTurnSpeed().
 static int unitsPerCM = -1;
 
@@ -153,7 +153,8 @@ int alignWithWall(int distanceFromWall, int futureDistanceFromWall){
 	goStraightInCM(distanceFromWall + 50, 400);
 	goStraightInCM(-1 * futureDistanceFromWall, 400);
 }
-
+	
+}
 int alignWithCorner(int distanceX, int distanceY, int futuredistanceX, int futuredistanceY, int direction){
 	//direction us -1 for up, 1 for down
 	alignWithWall(distanceX, futuredistanceX);
@@ -187,4 +188,17 @@ int turnRightDeg(int deg, int speed){
 		float percentTurn = (float)deg/360;
 		turnRight(speed, (unitsPer360Turn*percentTurn)/speed);//unitsPer360Turn:360 as ? : deg
 	}
+}
+int servoClawThingy(int servoPort){
+int i = 1;
+	while(i<=512){
+	set_servo_position(1, i);
+		i = i*2;
+		msleep(1000);
+	}
+	int i2 = i;
+	if(i=512) {
+		set_servo_position(1,i2)
+		}
+	}	
 }
