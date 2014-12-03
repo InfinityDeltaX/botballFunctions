@@ -188,3 +188,26 @@ int turnRightDeg(int deg, int speed){
 		turnRight(speed, (unitsPer360Turn*percentTurn)/speed);//unitsPer360Turn:360 as ? : deg
 	}
 }
+int servoClawThingy(int servoPort){
+int i = 1;
+	while(i<=128){
+	set_servo_position(1, i);
+		i = i*1.25;
+		msleep(1000);
+	}
+	while(i<=256 && i > 128){
+	set_servo_position(1, i);
+		i = i*1.75;
+		msleep(1000);
+	}
+	while(i<=384 && i > 256){
+	set_servo_position(1, i);
+		i = i*1.75;
+		msleep(1000);
+	}
+while(i<=512 && i > 284 ){
+	set_servo_position(1, i);
+		i = i*1.25;
+		msleep(1000);
+	}
+}
