@@ -188,3 +188,21 @@ int turnRightDeg(int deg, int speed){
 		turnRight(speed, (unitsPer360Turn*percentTurn)/speed);//unitsPer360Turn:360 as ? : deg
 	}
 }
+int calibrateServo(int servoPort){ 
+	//use to find the false origin of the servo. Must manually fill in to program.
+	int servoPosition;
+	printf("We will now calibrate the servo. Please press button A when the servo is at origin. \n");
+	set_servo_position(servoPort,servoPosition);
+	while(a_button_clicked()==0){
+		set_servo_position(servoPort, servoPosition);
+		servoPosition = servoPosition + 10;
+		msleep(1000);
+		if(a_button_clicked()==1){
+			int falseOrigin = get_servo_position(servoPort);
+			disable_servos();
+			printf("The origin of the servo is %d, please set the corresponding part of the array to that. \n", falseOrigin);
+		}
+	}
+}
+
+
